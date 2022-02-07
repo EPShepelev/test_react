@@ -1,114 +1,75 @@
-import React, {useState, useEffect} from 'react';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { v4 } from "uuid";
+import "./App.css";
+import WeatherList from "./components/WeatherList/WeatherList";
+import Settings from "./components/Settings/Setings";
+import { usePosition } from "./helpers/usePosition";
 
-const Waiting = () => {
-  return (
-    <div className='container'>
-      <p>Searching you and fetching weather, wait a few seconds...</p>
-    </div>
+const apiKey = "0d605237cf3a8070953669fbd55ae509";
+
+const App = () => {
+  const [editMode, setEditMode] = useState(false)
+  const [inputValue, setInputValue] = useState("");
+  const [cities, setCities] = useState(
+    JSON.parse(localStorage.getItem("cities")) || []
   );
-}
 
-const Widget = ({activateEditMode}) => {
-  const apiKey = '0d605237cf3a8070953669fbd55ae509'
-  const [weatherData, setWeatherData ] = useState([{}])
-  const [latitude, setLatitude] = useState(undefined)
-  const [longitude, setLongitude] = useState(undefined)
-  const [cityList, setCityList] = useState([]);
-
-  const getCoordinates = () => {
-    return new Promise(function(resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-  }
-
-  async function setCoordinates() {
-    await getCoordinates().then(position => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    });
-  }
-
-  setCoordinates()
-
-  useEffect(() => {
-    if (latitude && longitude) {
-      getDefaultWeather()
-      setCityList(weatherData.name) //видимо здесь нужно использовать localStorage чтобы хранить и обновлять массив городов
+  const addCity = () => {
+    const value = inputValue.trim();
+    if (value !== "" && !cities.find((city) => city.name === value)) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${apiKey}&units=metric`
+      ).then((response) =>
+        response.json().then((weather) => {
+            setCities((prev) => [
+              ...prev,
+              ...[{ name: value, id: v4(), weather }],
+            ]);
+        })
+      )
+      setInputValue("");
+    } else {
+      alert("Please, enter city");
+      setInputValue("");
     }
-  }, [latitude, longitude]);
+  };
+
+  const deleteCity = () => {
+    // найти город который соответствует удалению
+    // убрать его, создав новый массив
+  }
+
+  const {latitude, longitude} = usePosition()
 
   useEffect(() => {
-    cityList.forEach(city => {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`).then(
-        response => response.json().then(
-          data => {
-          // setWeatherData(data)
-          console.log(data)
-          }
-        )
+    if (!cities.length && latitude && longitude) {
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`).then(
+        response => response.json().then((weather) => {
+          setCities((prev) => [
+            ...prev,
+            ...[{ name: weather.name, id: v4(), weather }],
+          ]);
+        })
       )
-    });
-  }, [cityList]);
+    }
+    localStorage.setItem("cities", JSON.stringify(cities));
+  }, [latitude, longitude])
 
-  const getDefaultWeather = () => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`).then(
-      response => response.json().then(
-        data => {
-          setWeatherData(data)
-          console.log(data)
-        }
-      )
-    )
+  useEffect(() => {
+    localStorage.setItem("cities", JSON.stringify(cities));
+  }, [cities.length]);
+
+  const goToSettings = () => {
+    setEditMode(!editMode)
   }
 
-
-
-  if (!weatherData.id) {
-    return <Waiting />;
-  }
   return (
-    <div className='container'>
-      <button onClick={activateEditMode}>Settings</button>
-      <p>{weatherData.name}</p>
-      <p>{weatherData.main.temp} °C</p>
-      <p>{weatherData.main.pressure} Pa</p>
+    <div className="App">
+      <div className="container">
+        {editMode ? (<Settings cities={cities} addCity={addCity} inputValue={inputValue} setInputValue={setInputValue} goToSettings={goToSettings}/>) : (<WeatherList cities={cities} goToSettings={goToSettings}/>)}
+      </div>
     </div>
   );
-}
-
-const Settings = ({saveSettings}) => {
-  return (
-    <div className='container'>
-      <p>Settings</p>
-      <button onClick={saveSettings}>Save and close</button>
-    </div>
-  );
-}
-
-function App() {
-
-  const [editMode, setEditMod] = useState(false);
-
-  const activateEditMode = () => {
-    setEditMod(true);
-  };
-
-  const saveSettings = () => {
-    setEditMod(false);
-  };
-
-  return (
-    <div className='container'>
-      {editMode ? (
-        <Settings
-          saveSettings={saveSettings}
-        />
-      ) : (
-        <Widget activateEditMode={activateEditMode} />
-      )}
-    </div>
-  );
-}
+};
 
 export default App;

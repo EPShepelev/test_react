@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { v4 } from "uuid";
+import React from "react";
 
-const WeatherList = ({ cities }) => (
+const WeatherList = ({ cities, goToSettings }) => (
   <div>
     {cities.length &&
       cities.map((city) => {
@@ -15,6 +14,7 @@ const WeatherList = ({ cities }) => (
           return null;
         }
       })}
+      <button onClick={goToSettings}>Settings</button>
   </div>
 );
 
