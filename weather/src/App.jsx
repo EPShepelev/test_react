@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
-import "./App.css";
+import "./App.scss";
 import WeatherList from "./components/WeatherList/WeatherList";
 import Settings from "./components/Settings/Setings";
 import { usePosition } from "./helpers/usePosition";
@@ -34,9 +34,8 @@ const App = () => {
     }
   };
 
-  const deleteCity = () => {
-    // найти город который соответствует удалению
-    // убрать его, создав новый массив
+  const deleteCity = (id) => {
+    setCities(cities.filter(city => city.id !== id))
   }
 
   const {latitude, longitude} = usePosition()
@@ -66,7 +65,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="container">
-        {editMode ? (<Settings cities={cities} addCity={addCity} inputValue={inputValue} setInputValue={setInputValue} goToSettings={goToSettings}/>) : (<WeatherList cities={cities} goToSettings={goToSettings}/>)}
+        {editMode ? (<Settings cities={cities} addCity={addCity} deleteCity={deleteCity} inputValue={inputValue} setInputValue={setInputValue} goToSettings={goToSettings}/>) : (<WeatherList cities={cities} goToSettings={goToSettings}/>)}
       </div>
     </div>
   );
