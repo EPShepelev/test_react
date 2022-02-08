@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { v4 } from "uuid";
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import "./App.scss";
 import WeatherList from "./components/WeatherList/WeatherList";
-import Settings from "./components/Settings/Setings";
+import Settings from "./components/Settings/Settings";
+import { CitiesList } from "./components/CitiesList/CitiesList";
 import { usePosition } from "./helpers/usePosition";
+
 
 const apiKey = "0d605237cf3a8070953669fbd55ae509";
 
@@ -29,7 +33,7 @@ const App = () => {
       )
       setInputValue("");
     } else {
-      alert("Please, enter city");
+      alert("Please, enter correct city");
       setInputValue("");
     }
   };
@@ -63,12 +67,14 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <DndProvider backend={HTML5Backend}>
+      <div className="App">
       <div className="container">
-        {editMode ? (<Settings cities={cities} addCity={addCity} deleteCity={deleteCity} inputValue={inputValue} setInputValue={setInputValue} goToSettings={goToSettings}/>) : (<WeatherList cities={cities} goToSettings={goToSettings}/>)}
+        {editMode ? (<Settings cities={cities} setCities={setCities} addCity={addCity} deleteCity={deleteCity} inputValue={inputValue} setInputValue={setInputValue} goToSettings={goToSettings}/>) : (<WeatherList cities={cities} goToSettings={goToSettings}/>)}
       </div>
     </div>
-  );
+    </DndProvider>
+  )
 };
 
 export default App;
