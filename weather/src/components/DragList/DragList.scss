@@ -1,0 +1,26 @@
+.draglist{
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    border: 1px solid transparent;
+  &:hover {
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    }
+  }
+  &__city {
+    padding-left: 10px;
+    flex: 1;
+  }
+  &__del-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    img {
+      width: 30px;
+    }
+  }
+}

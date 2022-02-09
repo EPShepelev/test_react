@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import dragIcon from "../../assets/img/hamburger.png";
+import "./DragButton.scss";
 
-export const DragButton = ({ text, index, moveListItem }) => {
+export const DragButton = ({ index, moveListItem }) => {
   const [{ isDragging }, dragRef] = useDrag({
     type: "item",
     item: { index },
@@ -29,13 +30,17 @@ export const DragButton = ({ text, index, moveListItem }) => {
     },
   });
 
-  const ref = useRef(null)
-    const dragDropRef = dragRef(dropRef(ref))
+  const ref = useRef(null);
+  const dragDropRef = dragRef(dropRef(ref));
 
-    const opacity = isDragging ? 0 : 1
-    return (
-        <div ref={dragDropRef} style={{ opacity }}>
-            <img className="settings__drag-img" src={dragIcon} alt="drag and drop city"/>
-        </div>
-    )
+  const opacity = isDragging ? 0 : 1;
+  return (
+    <div className="dragbutton__block" ref={dragDropRef} style={{ opacity }}>
+      <img
+        className="dragbutton__img"
+        src={dragIcon}
+        alt="drag and drop city"
+      />
+    </div>
+  );
 };
