@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d19c9c2f.css",
+    "main.js": "/static/js/main.40050b0d.js",
+    "static/media/humidity.png": "/static/media/humidity.175cbf40f547cd4540f3.png",
+    "static/media/atmospheric.png": "/static/media/atmospheric.0cb72b298555c4192aa7.png",
+    "static/media/settings.png": "/static/media/settings.9e01723d2297a009fec2.png",
+    "static/media/trash.png": "/static/media/trash.d7cc5a6abe3558802a42.png",
+    "static/media/centigrade.png": "/static/media/centigrade.4c8429bc387b12e5c3a6.png",
+    "static/media/cross.png": "/static/media/cross.5d07d5fec43074868a45.png",
+    "static/media/add.png": "/static/media/add.cc2f8d72a3f47171d91d.png",
+    "static/media/hamburger.png": "/static/media/hamburger.fd4a642f9e267d03345d.png",
+    "index.html": "/index.html",
+    "main.d19c9c2f.css.map": "/static/css/main.d19c9c2f.css.map",
+    "main.40050b0d.js.map": "/static/js/main.40050b0d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d19c9c2f.css",
+    "static/js/main.40050b0d.js"
+  ]
+}
