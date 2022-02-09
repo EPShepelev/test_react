@@ -21,7 +21,7 @@
   <script src="bundle.js"></script>
   <script>
     window.addEventListener("DOMContentLoaded", function(e) {
-      new WeatherWidget("open");
+      new WeatherWidget("my-widget-id");
     });
   </script>
 </body>
