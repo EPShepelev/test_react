@@ -4,12 +4,12 @@ const option = {
   units: "metric"
 }
 
-export const getWeatherForDefaultCitiy = async (latitude, longitude) => {
+export const getWeatherForDefaultCitiy = async (latitude: string, longitude: string) => {
   const response = await fetch(`${option.baseURL}weather?lat=${latitude}&lon=${longitude}&appid=${option.apiKey}&units=${option.units}`);
   return await response.json();
 };
 
-export const getCitiesWeather = async (cityName) => {
+export const getCitiesWeather = async (cityName: string) => {
   const response = await fetch(`${option.baseURL}weather?q=${cityName}&appid=${option.apiKey}&units=${option.units}`)
   return await response.json();
 }

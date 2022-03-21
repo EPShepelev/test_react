@@ -1,0 +1,12 @@
+.block {
+    cursor: pointer;
+  }
+  svg {
+    width: 35px;
+    height: 35px;
+    color: #c9bdbd;
+    transition: color 1.5s;
+    &:hover {
+      color: #000;
+    }
+  }

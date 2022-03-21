@@ -1,5 +1,5 @@
-.draglist{
-  &__item {
+
+  .item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -11,16 +11,21 @@
     border-radius: 5px;
     }
   }
-  &__city {
+  .city {
     padding-left: 10px;
     flex: 1;
   }
-  &__del-btn {
+  .delete {
     background: transparent;
     border: none;
     cursor: pointer;
-    img {
-      width: 30px;
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #c9bdbd;
+      transition: color 1.5s;
+      &:hover {
+        color: #d62222;
+      }
     }
   }
-}

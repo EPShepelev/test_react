@@ -1,15 +1,20 @@
-.settings{
-  &__close-btn {
+.close {
     background: transparent;
     border: none;
     cursor: pointer;
     display: block;
     margin: 0 0 15px auto;
-    img {
+    svg {
       width: 30px;
+      height: 30px;
+      color: #c9bdbd;
+      transition: color 1.5s;
+      &:hover {
+        color: #000;
+      }
     }
   }
-  &__input-block {
+  .input {
     margin: 20px auto;
     display: flex;
     justify-content: space-between;
@@ -23,9 +28,16 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      img {
-        width: 30px;
+      svg {
+        width: 40px;
+        height: 40px;
+        color: #c9bdbd;
+        transition: color 1.5s;
+        &:hover {
+          color: #50a310;
+        }
       }
     }
   }
-}
+
+

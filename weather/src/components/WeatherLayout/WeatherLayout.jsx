@@ -1,4 +1,3 @@
-import "./WeatherLayout.scss";
 import { WeatherList } from  "../WeatherList/WeatherList"
 import { SettingsButton } from  "../SettingsButton/SettingsButton"
 

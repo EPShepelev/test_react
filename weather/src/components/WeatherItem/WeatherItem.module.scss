@@ -1,27 +1,14 @@
-.weather {
-  &__settings-btn {
-    display: block;
-    margin-right: 0;
-    margin-left: auto;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-  }
-  &__settings-img {
-    width: 25px;
-  }
-  &__item {
-    padding: 5px;
+.item {
+  padding: 5px;
     margin: 5px 0;
     border-bottom: 1px solid #c0c0c0;
     &:last-child {
       border-bottom: none;
     }
-  }
-  &__icon {
+  .icon {
     width: 80px;
   }
-  &__city {
+  .city {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -29,14 +16,17 @@
     p {
       font-size: 32px;
       line-height: 100%;
+      &:first-letter {
+        text-transform: uppercase;
+      }
     }
   }
-  &__data {
+  .data {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    &-item {
+    .text {
       display: flex;
     flex-direction: row;
     justify-content: center;
@@ -44,7 +34,7 @@
     font-size: 20px;
     }
   }
-  &__data-temp {
+  .digits {
     width: 40px;
   }
 }
