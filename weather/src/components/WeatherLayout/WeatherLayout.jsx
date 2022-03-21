@@ -1,9 +1,14 @@
-import { WeatherList } from  "../WeatherList/WeatherList"
-import { SettingsButton } from  "../SettingsButton/SettingsButton"
+import { WeatherList } from "../WeatherList/WeatherList";
+import { SettingsButton } from "../SettingsButton/SettingsButton";
+import { UpdateButton } from "../UpdateButton/UpdateButton";
+import styles from './WeatherLayout.module.scss';
 
-export const WeatherLayout = ({ cities, goToSettings }) => (
+export const WeatherLayout = ({ cities, updateWeather, goToSettings }) => (
   <div>
-    <SettingsButton goToSettings={goToSettings}/>
+    <div className={styles.buttons}>
+      <UpdateButton updateWeather={updateWeather} />
+      <SettingsButton goToSettings={goToSettings} />
+    </div>
     <WeatherList cities={cities} />
   </div>
 );

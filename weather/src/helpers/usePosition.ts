@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 
 const defaultSettings = {
   enableHighAccuracy: false,
-  timeout: Infinity,
+  timeout: 10000,
   maximumAge: 0,
 };
 
@@ -13,9 +13,9 @@ export const usePosition = (watch = false, userSettings = {}) => {
   };
 
   const [position, setPosition] = useState({});
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const onChange = ({coords, timestamp}) => {
+  const onChange = ({coords, timestamp}: GeolocationPosition) => {
     setPosition({
       latitude: coords.latitude,
       longitude: coords.longitude,
@@ -26,7 +26,7 @@ export const usePosition = (watch = false, userSettings = {}) => {
     });
   };
 
-  const onError = (error) => {
+  const onError = (error: GeolocationPositionError) => {
     setError(error.message);
   };
 
