@@ -9,13 +9,12 @@ import { getWeatherForDefaultCitiy, getCitiesWeather } from "./api/api";
 import "./App.scss";
 
 const App = () => {
-  const [count, setCount] = useState(0);
   const [editMode, setEditMode] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [cities, setCities] = useState(
     JSON.parse(localStorage.getItem("cities")) || []
   );
-  const { latitude, longitude } = usePosition();
+  const { latitude, longitude }  = usePosition();
 
   useEffect(() => {
     if (!cities.length && latitude && longitude) {
@@ -53,21 +52,6 @@ const App = () => {
   const deleteCity = (id) => {
     setCities(cities.filter((city) => city.id !== id));
   };
-
-  // так как в тз нет требования к обновлнию погоды сделал на свое усмотрение, обновление с интервалом 5 минут, можно сделать обновление по нажатию кнопки
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (cities.length) {
-  //       cities.forEach((city) => {
-  //         getCitiesWeather(city.name).then((weather) => {
-  //           city.weather = weather;
-  //         });
-  //       });
-  //     }
-  //     setCount((count) => count + 1);
-  //   }, 300000);
-  //   return () => clearInterval(interval);
-  // }, [count]);
 
   useEffect(() => {
     localStorage.setItem("cities", JSON.stringify(cities));
