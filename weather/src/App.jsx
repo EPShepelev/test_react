@@ -26,11 +26,11 @@ const App = () => {
       });
     }
     localStorage.setItem("cities", JSON.stringify(cities));
-  }, [latitude, longitude]);
+  }, [latitude, longitude, cities]);
 
   useEffect(() => {
     localStorage.setItem("cities", JSON.stringify(cities));
-  }, [cities.length, cities.weather]);
+  }, [cities.length, cities.weather, cities]);
 
   const addCity = () => {
     const value = inputValue.trim();
@@ -63,11 +63,13 @@ const App = () => {
 
   const updateWeather = (cities) => {
     if (cities.length) {
-      const citiesWithNewWeather = cities.forEach((city) => {
+      const citiesWithNewWeather = [...cities]
+      citiesWithNewWeather.forEach((city) => {
         getCitiesWeather(city.name).then((weather) => {
           city.weather = weather;
         });
       });
+      localStorage.setItem("cities", JSON.stringify(citiesWithNewWeather))
       setCities(citiesWithNewWeather)
     }
   }

@@ -8,6 +8,7 @@ interface WeatherListProps {
 
 export const WeatherList: FC<WeatherListProps> = ({ cities }) => (
   <div>
+    {!cities && <div>Загрузка</div>}
     {cities.length &&
       cities.map((city: ICity) => {
         if (city.weather?.id) {
