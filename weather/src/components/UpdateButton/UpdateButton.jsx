@@ -1,12 +1,10 @@
 import styles from "./UpdateButton.module.scss";
 
 export const UpdateButton = ({ cities, updateWeather }) => {
-  const updateWeatherBtnClickHandle = (cities) => {
-    updateWeather(cities);
-  };
+
   return (
     <div className={styles.button}>
-      <button onClick={updateWeatherBtnClickHandle}>
+      <button onClick={() => updateWeather(cities)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
